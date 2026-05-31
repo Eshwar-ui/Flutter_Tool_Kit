@@ -99,13 +99,6 @@ Use `AppFormValidators.email()`, `AppFormValidators.password()`, and the other v
 
 ## Publishing
 
-Before the first public release, add the real GitHub repository URL to `pubspec.yaml`:
-
-```yaml
-repository: https://github.com/<owner>/flutter_tool_kit
-issue_tracker: https://github.com/<owner>/flutter_tool_kit/issues
-```
-
 Before publishing a new version:
 
 ```bash
