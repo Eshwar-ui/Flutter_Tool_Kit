@@ -312,8 +312,7 @@ final class _AppTextFormFieldState extends State<AppTextFormField> {
         hintText: widget.hintText,
         helperText: widget.helperText,
         prefixIcon: widget.prefixIcon,
-        suffixIcon:
-            widget.suffixIcon ??
+        suffixIcon: widget.suffixIcon ??
             (canTogglePassword
                 ? IconButton(
                     tooltip: obscureText ? 'Show password' : 'Hide password',

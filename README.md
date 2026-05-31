@@ -1,6 +1,6 @@
-# Flutter Tool Kit
+# Flutter App Utilities
 
-`flutter_tool_kit` is a zero-dependency Flutter package for reusable app building blocks: extensions, form presets, validators, UX guardrails, state helpers, feedback widgets, and common blocking screens.
+`flutter_app_utilities` is a zero-dependency Flutter package for reusable app building blocks: extensions, form presets, validators, UX guardrails, state helpers, feedback widgets, and common blocking screens.
 
 The package is designed for production Flutter apps where the same small patterns appear again and again: login fields, loading states, empty states, retry screens, permission screens, safe mobile layouts, touch target rules, and basic app utilities.
 
@@ -22,13 +22,13 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_tool_kit: ^0.1.0
+  flutter_app_utilities: ^0.1.0
 ```
 
 Import it:
 
 ```dart
-import 'package:flutter_tool_kit/flutter_tool_kit.dart';
+import 'package:flutter_app_utilities/flutter_app_utilities.dart';
 ```
 
 ## Login And Signup Fields

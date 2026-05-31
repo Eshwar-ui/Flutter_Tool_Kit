@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tool_kit/flutter_tool_kit.dart';
+import 'package:flutter_app_utilities/flutter_app_utilities.dart';
 
 void main() {
   runApp(const ToolkitExampleApp());
@@ -41,7 +41,7 @@ final class _ToolkitExampleScreenState extends State<ToolkitExampleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Tool Kit')),
+      appBar: AppBar(title: const Text('Flutter App Utilities')),
       body: SafeScrollable(
         bottomAction: StickyBottomActionBar(
           child: FilledButton(

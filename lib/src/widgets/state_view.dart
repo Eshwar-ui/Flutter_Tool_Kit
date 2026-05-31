@@ -6,13 +6,12 @@ import 'loading_state.dart';
 
 typedef StateDataBuilder<T> = Widget Function(BuildContext context, T value);
 
-typedef StateErrorBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      Object error,
-      StackTrace? stackTrace,
-      T? previousData,
-    );
+typedef StateErrorBuilder<T> = Widget Function(
+  BuildContext context,
+  Object error,
+  StackTrace? stackTrace,
+  T? previousData,
+);
 
 final class StateView<T> extends StatelessWidget {
   const StateView({

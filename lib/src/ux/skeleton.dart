@@ -21,8 +21,7 @@ final class SkeletonBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color beginColor =
-        baseColor ??
+    final Color beginColor = baseColor ??
         colorScheme.surfaceContainerHighest.withValues(alpha: 0.72);
     final Color endColor =
         highlightColor ?? colorScheme.surfaceContainerHighest;

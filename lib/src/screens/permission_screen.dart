@@ -30,8 +30,7 @@ final class PermissionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppIssueScreen(
       title: title ?? '$permissionName permission needed',
-      message:
-          message ??
+      message: message ??
           'Enable $permissionName permission to continue using this feature.',
       icon: icon,
       primaryActionLabel: primaryActionLabel,

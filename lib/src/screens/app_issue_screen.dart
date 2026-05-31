@@ -54,8 +54,8 @@ final class AppIssueScreen extends StatelessWidget {
                     message,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
                   if (primaryActionLabel != null &&
                       onPrimaryAction != null) ...<Widget>[

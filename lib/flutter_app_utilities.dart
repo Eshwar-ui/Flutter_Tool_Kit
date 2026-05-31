@@ -1,4 +1,4 @@
-library flutter_tool_kit;
+library flutter_app_utilities;
 
 export 'src/extensions/build_context_extensions.dart';
 export 'src/extensions/date_time_extensions.dart';

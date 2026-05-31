@@ -1,5 +1,5 @@
+import 'package:flutter_app_utilities/flutter_app_utilities.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_tool_kit/flutter_tool_kit.dart';
 
 void main() {
   group('StringExtensions', () {

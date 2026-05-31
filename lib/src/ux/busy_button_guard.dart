@@ -1,7 +1,10 @@
 import 'package:flutter/widgets.dart';
 
-typedef BusyButtonBuilder =
-    Widget Function(BuildContext context, bool isBusy, VoidCallback? onPressed);
+typedef BusyButtonBuilder = Widget Function(
+  BuildContext context,
+  bool isBusy,
+  VoidCallback? onPressed,
+);
 
 final class BusyButtonGuard extends StatefulWidget {
   const BusyButtonGuard({
@@ -46,6 +49,10 @@ final class _BusyButtonGuardState extends State<BusyButtonGuard> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, _isBusy, _canSubmit ? _handlePressed : null);
+    return widget.builder(
+      context,
+      _isBusy,
+      _canSubmit ? _handlePressed : null,
+    );
   }
 }

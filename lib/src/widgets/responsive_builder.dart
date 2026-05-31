@@ -2,12 +2,11 @@ import 'package:flutter/widgets.dart';
 
 enum ResponsiveSize { mobile, tablet, desktop }
 
-typedef ResponsiveWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      ResponsiveSize size,
-      BoxConstraints constraints,
-    );
+typedef ResponsiveWidgetBuilder = Widget Function(
+  BuildContext context,
+  ResponsiveSize size,
+  BoxConstraints constraints,
+);
 
 final class ResponsiveBuilder extends StatelessWidget {
   const ResponsiveBuilder({

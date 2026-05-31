@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_utilities/flutter_app_utilities.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_tool_kit/flutter_tool_kit.dart';
 
 void main() {
   testWidgets('MinTouchTarget enforces accessible minimum size', (
@@ -37,11 +37,11 @@ void main() {
           },
           builder:
               (BuildContext context, bool isBusy, VoidCallback? onPressed) {
-                return ElevatedButton(
-                  onPressed: onPressed,
-                  child: Text(isBusy ? 'Saving' : 'Save'),
-                );
-              },
+            return ElevatedButton(
+              onPressed: onPressed,
+              child: Text(isBusy ? 'Saving' : 'Save'),
+            );
+          },
         ),
       ),
     );

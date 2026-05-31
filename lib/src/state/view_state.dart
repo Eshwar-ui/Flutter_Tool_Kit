@@ -47,7 +47,7 @@ sealed class ViewState<T> {
     required R Function(T value) data,
     required R Function(String? message) empty,
     required R Function(Object error, StackTrace? stackTrace, T? previousData)
-    failure,
+        failure,
   }) {
     return switch (this) {
       IdleViewState<T>() => idle(),
