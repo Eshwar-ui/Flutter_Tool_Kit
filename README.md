@@ -1,56 +1,107 @@
 # Flutter Tool Kit
 
-Reusable Flutter building blocks for app projects: extensions, common view states, UX primitives, form presets, validators, and app state screens that remove repeated boilerplate.
+`flutter_tool_kit` is a zero-dependency Flutter package for reusable app building blocks: extensions, form presets, validators, UX guardrails, state helpers, feedback widgets, and common blocking screens.
+
+The package is designed for production Flutter apps where the same small patterns appear again and again: login fields, loading states, empty states, retry screens, permission screens, safe mobile layouts, touch target rules, and basic app utilities.
+
+## Features
+
+- **Login and signup fields**: ready-made email, password, confirm password, name, phone, and OTP fields.
+- **Validators**: reusable validation methods for custom form fields.
+- **UX primitives**: spacing, radius, duration, breakpoint, and touch target tokens.
+- **Interaction safety**: minimum touch targets, tap feedback, duplicate-submit guards, and keyboard dismissal.
+- **Feedback patterns**: snackbars, banners, confirmation dialogs, retry views, and skeleton loading.
+- **Common screens**: no internet, server connection failure, permission, and generic issue screens.
+- **State helpers**: `ViewState<T>` and `StateView<T>` for loading/data/empty/error flows.
+- **Accessibility helpers**: semantic buttons, accessible icon buttons, focus rings, and debug UX assertions.
+- **General extensions**: helpers for `BuildContext`, `String`, nullable `String`, `Iterable`, `num`, and `DateTime`.
 
 ## Installation
 
-After publishing, add the package from pub.dev:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   flutter_tool_kit: ^0.1.0
 ```
 
-Then import the public barrel file:
+Import it:
 
 ```dart
 import 'package:flutter_tool_kit/flutter_tool_kit.dart';
 ```
 
-For local development before publishing, use a path dependency:
+## Login And Signup Fields
 
-```yaml
-dependencies:
-  flutter_tool_kit:
-    path: ../Flutter Tool Box
-```
-
-## What is included
-
-- Extensions for `BuildContext`, `String`, nullable `String`, `Iterable`, `num`, and `DateTime`.
-- `ViewState<T>` for idle, loading, data, empty, and failure UI flows.
-- Common widgets like `AppGap`, `StateView`, `EmptyState`, `LoadingState`, `ResponsiveBuilder`, and `TapScale`.
-- Mobile UX primitives for spacing, touch targets, feedback, forms, accessibility, skeleton loading, safe scrolling, and sticky bottom actions.
-
-## UX Layer
-
-Use these primitives in every app to avoid common mobile UX misses:
-
-- `AppSpacing`, `AppRadius`, `AppDurations`, `AppBreakpoints`, and `AppTouchTargets` for shared UX tokens.
-- `MinTouchTarget`, `AppTapFeedback`, `BusyButtonGuard`, and `KeyboardDismissOnTap` for safer interactions.
-- `AppSnack`, `AppBanner`, `ConfirmActionDialog`, `RetryView`, `SkeletonBox`, and `SkeletonList` for mandatory user feedback.
-- `AppTextFieldShell`, `FormSubmitScope`, and `ValidationMessage` for consistent form UX.
-- `AccessibleIconButton`, `SemanticsButton`, `FocusRing`, and `UxAssert` for accessibility guardrails.
-- `SafeScrollable` and `StickyBottomActionBar` for reliable mobile screen structure.
-- `NoInternetScreen`, `NoServerConnectionScreen`, and `PermissionScreen` for common blocking states.
-- `AppTextFormField.email`, `.password`, `.confirmPassword`, `.name`, `.phone`, and `.otp` for login/signup-ready fields.
-
-## Common Screens
-
-Use the ready-made issue screens for mandatory app states:
+Use `AppTextFormField` presets when you want the full text field ready with label, keyboard type, autofill hints, validation, and password visibility behavior.
 
 ```dart
-NoInternetScreen(onRetry: reloadData)
+final passwordController = TextEditingController();
+
+Form(
+  child: Column(
+    children: [
+      AppTextFormField.name(),
+      AppTextFormField.email(),
+      AppTextFormField.password(controller: passwordController),
+      AppTextFormField.confirmPassword(
+        passwordController: passwordController,
+      ),
+      AppTextFormField.phone(),
+      AppTextFormField.otp(),
+    ],
+  ),
+)
+```
+
+Available presets:
+
+- `AppTextFormField.email()`
+- `AppTextFormField.password()`
+- `AppTextFormField.confirmPassword()`
+- `AppTextFormField.name()`
+- `AppTextFormField.phone()`
+- `AppTextFormField.otp()`
+
+## Validators
+
+Use `AppFormValidators` when you already have your own text field but want consistent validation rules.
+
+```dart
+TextFormField(
+  validator: AppFormValidators.email(),
+)
+
+TextFormField(
+  obscureText: true,
+  validator: AppFormValidators.password(
+    minLength: 8,
+    requireUppercase: true,
+    requireLowercase: true,
+    requireNumber: true,
+  ),
+)
+```
+
+You can compose validators:
+
+```dart
+TextFormField(
+  validator: AppFormValidators.compose([
+    AppFormValidators.required(),
+    AppFormValidators.email(),
+  ]),
+)
+```
+
+## Common App Screens
+
+Use reusable screens for blocking states that appear in almost every mobile app.
+
+```dart
+NoInternetScreen(
+  onRetry: reloadData,
+)
 
 NoServerConnectionScreen(
   onRetry: retryRequest,
@@ -65,46 +116,207 @@ PermissionScreen(
 )
 ```
 
-Set `wrapWithScaffold: false` when placing these inside an existing screen body.
-
-## Login And Signup Fields
-
-Use preset text fields when a screen needs standard form behavior without repeating validation, keyboard type, autofill, and password visibility code:
+Use `wrapWithScaffold: false` when embedding these screens inside an existing page body.
 
 ```dart
-final passwordController = TextEditingController();
+NoInternetScreen(
+  wrapWithScaffold: false,
+  onRetry: reloadData,
+)
+```
 
-Form(
-  child: Column(
-    children: [
-      AppTextFormField.email(),
-      AppTextFormField.password(controller: passwordController),
-      AppTextFormField.confirmPassword(
-        passwordController: passwordController,
-      ),
-      AppTextFormField.phone(),
-    ],
+For custom blocking states, use the base screen:
+
+```dart
+AppIssueScreen(
+  title: 'Location unavailable',
+  message: 'Enable location access to find nearby stores.',
+  icon: Icons.location_off_rounded,
+  primaryActionLabel: 'Enable location',
+  onPrimaryAction: requestLocation,
+)
+```
+
+## State Handling
+
+`ViewState<T>` gives a simple shared shape for UI state:
+
+```dart
+const ViewState.loading();
+const ViewState.data(items);
+const ViewState.empty(message: 'No items found');
+ViewState.failure(error);
+```
+
+Render the state with `StateView<T>`:
+
+```dart
+StateView<List<String>>(
+  state: state,
+  onRetry: loadItems,
+  dataBuilder: (context, items) {
+    return ListView(
+      children: items.map(Text.new).toList(),
+    );
+  },
+)
+```
+
+## UX Primitives
+
+Use the built-in tokens to keep spacing, motion, breakpoints, and touch sizes consistent:
+
+```dart
+const SizedBox(height: AppSpacing.md)
+
+AnimatedContainer(
+  duration: AppDurations.normal,
+  decoration: const BoxDecoration(
+    borderRadius: AppRadius.medium,
   ),
 )
 ```
 
-Use `AppFormValidators.email()`, `AppFormValidators.password()`, and the other validator helpers when you need the validation rules with your own custom fields.
+Important tokens:
 
-## Suggested Repo Rules
+- `AppSpacing`: `xxs`, `xs`, `sm`, `md`, `lg`, `xl`
+- `AppRadius`: `xs`, `sm`, `md`, `lg`, `pill`
+- `AppDurations`: `instantFeedback`, `fast`, `normal`, `slow`
+- `AppBreakpoints`: `mobile`, `tablet`, `desktop`
+- `AppTouchTargets`: minimum accessible touch target size
 
-- Keep app-specific code out of this package.
-- Prefer tiny, composable helpers over large framework abstractions.
-- Add tests for reusable logic before using it in multiple apps.
-- Export stable APIs only through `lib/flutter_tool_kit.dart`.
+## Interaction Helpers
 
-## Publishing
+Use these widgets to avoid common mobile UX mistakes:
 
-Before publishing a new version:
+```dart
+MinTouchTarget(
+  child: IconButton(
+    onPressed: onClose,
+    icon: const Icon(Icons.close),
+  ),
+)
 
-```bash
-flutter analyze
-flutter test
-flutter pub publish --dry-run
+BusyButtonGuard(
+  onPressed: submitForm,
+  builder: (context, isBusy, onPressed) {
+    return FilledButton(
+      onPressed: onPressed,
+      child: Text(isBusy ? 'Saving...' : 'Save'),
+    );
+  },
+)
+
+KeyboardDismissOnTap(
+  child: formScreen,
+)
 ```
 
-Publish only after the dry run reports no warnings or errors.
+## Feedback And Loading
+
+Show consistent feedback across apps:
+
+```dart
+AppSnack.success(context, 'Saved successfully');
+AppSnack.error(context, 'Something went wrong');
+```
+
+Use dialogs for destructive actions:
+
+```dart
+final confirmed = await ConfirmActionDialog.show(
+  context,
+  title: 'Delete item?',
+  message: 'This action cannot be undone.',
+  confirmLabel: 'Delete',
+  isDestructive: true,
+);
+```
+
+Use skeletons while content is loading:
+
+```dart
+const SkeletonList(itemCount: 6)
+```
+
+## Accessibility Helpers
+
+Use accessible wrappers for icon-only or custom controls:
+
+```dart
+AccessibleIconButton(
+  semanticLabel: 'Close dialog',
+  onPressed: onClose,
+  icon: const Icon(Icons.close),
+)
+
+SemanticsButton(
+  label: 'Open profile',
+  onTap: openProfile,
+  child: avatar,
+)
+```
+
+Use `FocusRing` when building custom interactive surfaces that need visible keyboard focus.
+
+## Layout Helpers
+
+`SafeScrollable` handles safe areas, keyboard insets, scroll behavior, and bottom actions:
+
+```dart
+SafeScrollable(
+  bottomAction: StickyBottomActionBar(
+    child: FilledButton(
+      onPressed: submit,
+      child: const Text('Continue'),
+    ),
+  ),
+  child: formContent,
+)
+```
+
+## Extensions
+
+The package includes small extensions for common app code:
+
+```dart
+context.theme
+context.colorScheme
+context.textTheme
+context.isMobile
+context.hideKeyboard()
+
+' hello   world '.normalizedSpaces
+'john doe'.titleCased
+
+[1, 2, 3].firstOrNull
+[1, 2, 3].mapIndexed((index, value) => '$index:$value')
+
+16.gapY
+300.milliseconds
+
+DateTime.now().startOfDay
+```
+
+## Example
+
+See the `example/` directory for a small Flutter app that demonstrates:
+
+- login/signup field presets
+- validation
+- safe scrolling
+- sticky bottom actions
+- common issue screens
+- snackbar feedback
+
+## Design Goals
+
+- Keep the package dependency-free.
+- Prefer small reusable primitives over a large app framework.
+- Stay compatible with plain Flutter widgets.
+- Let each app own its own theme and visual identity.
+- Provide defaults that prevent common UX mistakes without forcing one brand style.
+
+## License
+
+MIT License. See `LICENSE` for details.
