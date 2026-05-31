@@ -3,7 +3,7 @@
 build/
 coverage/
 pubspec.lock
-linkedin-assets/
+
 
 *.iml
 .idea/
