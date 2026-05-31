@@ -1,0 +1,32 @@
+name: flutter_tool_kit
+description: A zero-dependency Flutter toolkit with reusable extensions, UX widgets, form presets, validators, and common app state screens.
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+topics:
+  - flutter
+  - widgets
+  - forms
+  - validators
+  - ux
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
