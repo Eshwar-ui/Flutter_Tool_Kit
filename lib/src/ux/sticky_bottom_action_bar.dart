@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'ux_tokens.dart';
 
+/// A safe-area-aware action bar pinned to the bottom of a screen, holding a
+/// primary action and an optional secondary action with a top divider.
 final class StickyBottomActionBar extends StatelessWidget {
+  /// Creates a sticky bottom action bar.
   const StickyBottomActionBar({
     super.key,
     required this.child,
@@ -11,9 +14,16 @@ final class StickyBottomActionBar extends StatelessWidget {
     this.showDivider = true,
   });
 
+  /// The primary action widget.
   final Widget child;
+
+  /// An optional secondary action shown before the primary one.
   final Widget? secondary;
+
+  /// Padding around the actions.
   final EdgeInsets padding;
+
+  /// Whether to draw a divider along the top edge.
   final bool showDivider;
 
   @override

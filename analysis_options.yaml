@@ -9,6 +9,7 @@ analyzer:
 
 linter:
   rules:
+    public_member_api_docs: true
     always_declare_return_types: true
     avoid_print: true
     avoid_redundant_argument_values: true

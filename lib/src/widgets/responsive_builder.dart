@@ -1,14 +1,29 @@
 import 'package:flutter/widgets.dart';
 
-enum ResponsiveSize { mobile, tablet, desktop }
+/// The responsive size bucket resolved from the available width.
+enum ResponsiveSize {
+  /// A narrow, phone-sized layout.
+  mobile,
 
+  /// A medium, tablet-sized layout.
+  tablet,
+
+  /// A wide, desktop-sized layout.
+  desktop,
+}
+
+/// Builds a widget from the current [BuildContext], resolved [ResponsiveSize],
+/// and layout [BoxConstraints].
 typedef ResponsiveWidgetBuilder = Widget Function(
   BuildContext context,
   ResponsiveSize size,
   BoxConstraints constraints,
 );
 
+/// Rebuilds its [builder] with the [ResponsiveSize] derived from the available
+/// width, so layouts can adapt to mobile, tablet, and desktop breakpoints.
 final class ResponsiveBuilder extends StatelessWidget {
+  /// Creates a responsive builder.
   const ResponsiveBuilder({
     super.key,
     required this.builder,
@@ -16,8 +31,14 @@ final class ResponsiveBuilder extends StatelessWidget {
     this.desktopBreakpoint = 1024,
   });
 
+  /// Builds the widget for the resolved size and constraints.
   final ResponsiveWidgetBuilder builder;
+
+  /// The width (inclusive) at which the layout becomes [ResponsiveSize.tablet].
   final double tabletBreakpoint;
+
+  /// The width (inclusive) at which the layout becomes
+  /// [ResponsiveSize.desktop].
   final double desktopBreakpoint;
 
   @override

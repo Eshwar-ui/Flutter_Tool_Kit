@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A centered loading indicator with an optional message, with a [compact]
+/// variant for inline use.
 final class LoadingState extends StatelessWidget {
+  /// Creates a loading-state placeholder.
   const LoadingState({
     super.key,
     this.message,
@@ -8,8 +11,13 @@ final class LoadingState extends StatelessWidget {
     this.compact = false,
   });
 
+  /// An optional message shown beneath the indicator.
   final String? message;
+
+  /// Padding around the content.
   final EdgeInsetsGeometry padding;
+
+  /// Whether to use the smaller, inline-friendly layout.
   final bool compact;
 
   @override

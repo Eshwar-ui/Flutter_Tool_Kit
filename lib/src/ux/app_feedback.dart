@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 
-enum AppFeedbackType { success, error, info, warning }
+/// The semantic kind of user feedback, used to color snack bars and banners.
+enum AppFeedbackType {
+  /// A successful or positive outcome.
+  success,
 
+  /// An error or failure.
+  error,
+
+  /// Neutral, informational feedback.
+  info,
+
+  /// A caution or warning.
+  warning,
+}
+
+/// Static helpers for showing themed [SnackBar] feedback by [AppFeedbackType].
 abstract final class AppSnack {
+  /// Shows a snack bar with [message], colored according to [type].
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> show(
     BuildContext context,
     String message, {
@@ -22,6 +37,7 @@ abstract final class AppSnack {
     );
   }
 
+  /// Shows a success-styled snack bar with [message].
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> success(
     BuildContext context,
     String message, {
@@ -35,6 +51,7 @@ abstract final class AppSnack {
     );
   }
 
+  /// Shows an error-styled snack bar with [message].
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> error(
     BuildContext context,
     String message, {
@@ -53,7 +70,10 @@ abstract final class AppSnack {
   }
 }
 
+/// An inline, dismissible feedback banner colored by [AppFeedbackType], with
+/// optional leading icon and action.
 final class AppBanner extends StatelessWidget {
+  /// Creates a feedback banner.
   const AppBanner({
     super.key,
     required this.message,
@@ -63,10 +83,20 @@ final class AppBanner extends StatelessWidget {
     this.onDismissed,
   });
 
+  /// The message to display.
   final String message;
+
+  /// The feedback kind that determines the banner's colors.
   final AppFeedbackType type;
+
+  /// An optional widget (e.g. an icon) shown before the message.
   final Widget? leading;
+
+  /// An optional action widget shown after the message.
   final Widget? action;
+
+  /// Called when the dismiss button is pressed; the button is hidden when
+  /// `null`.
   final VoidCallback? onDismissed;
 
   @override

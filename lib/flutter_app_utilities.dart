@@ -1,3 +1,11 @@
+/// A collection of reusable Flutter widgets, extensions, validators, and
+/// state utilities for building accessible, consistent apps faster.
+///
+/// Import this single library to access every public API in the package:
+///
+/// ```dart
+/// import 'package:flutter_app_utilities/flutter_app_utilities.dart';
+/// ```
 library flutter_app_utilities;
 
 export 'src/extensions/build_context_extensions.dart';

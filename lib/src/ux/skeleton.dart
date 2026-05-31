@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'ux_tokens.dart';
 
+/// A pulsing placeholder box used to indicate loading content (shimmer-style
+/// skeleton).
 final class SkeletonBox extends StatelessWidget {
+  /// Creates a skeleton placeholder box.
   const SkeletonBox({
     super.key,
     this.width,
@@ -12,10 +15,19 @@ final class SkeletonBox extends StatelessWidget {
     this.highlightColor,
   });
 
+  /// The box width; `null` fills the available width.
   final double? width;
+
+  /// The box height.
   final double height;
+
+  /// The corner radius of the box.
   final BorderRadiusGeometry borderRadius;
+
+  /// The base (dimmer) color; defaults to a theme surface color.
   final Color? baseColor;
+
+  /// The highlight (brighter) color; defaults to a theme surface color.
   final Color? highlightColor;
 
   @override
@@ -45,7 +57,10 @@ final class SkeletonBox extends StatelessWidget {
   }
 }
 
+/// A scrollable list of [SkeletonBox] rows used as a loading placeholder for
+/// list content.
 final class SkeletonList extends StatelessWidget {
+  /// Creates a skeleton list placeholder.
   const SkeletonList({
     super.key,
     this.itemCount = 6,
@@ -54,9 +69,16 @@ final class SkeletonList extends StatelessWidget {
     this.padding = AppSpacing.screenPadding,
   });
 
+  /// The number of placeholder rows to show.
   final int itemCount;
+
+  /// The vertical spacing between rows.
   final double spacing;
+
+  /// The height of each placeholder row.
   final double itemHeight;
+
+  /// Padding around the list.
   final EdgeInsetsGeometry padding;
 
   @override

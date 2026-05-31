@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A centered placeholder for empty or error states, with an icon, title,
+/// message, and either a custom action or a built-in retry button.
 final class EmptyState extends StatelessWidget {
+  /// Creates an empty-state placeholder.
   const EmptyState({
     super.key,
     required this.title,
@@ -13,13 +16,28 @@ final class EmptyState extends StatelessWidget {
     this.compact = false,
   });
 
+  /// The headline text.
   final String title;
+
+  /// An optional supporting message.
   final String? message;
+
+  /// An optional icon shown above the title.
   final IconData? icon;
+
+  /// A custom action widget; takes precedence over the retry button.
   final Widget? action;
+
+  /// Called when the built-in retry button is pressed.
   final VoidCallback? onRetry;
+
+  /// The label for the built-in retry button.
   final String retryLabel;
+
+  /// Padding around the content.
   final EdgeInsetsGeometry padding;
+
+  /// Whether to use the smaller, inline-friendly layout.
   final bool compact;
 
   @override

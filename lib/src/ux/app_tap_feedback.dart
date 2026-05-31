@@ -2,7 +2,10 @@ import 'package:flutter/widgets.dart';
 
 import 'ux_tokens.dart';
 
+/// Wraps a child so it scales down and dims briefly while pressed, giving
+/// tactile feedback to taps without a full ripple.
 final class AppTapFeedback extends StatefulWidget {
+  /// Creates a tap-feedback wrapper.
   const AppTapFeedback({
     super.key,
     required this.child,
@@ -14,12 +17,25 @@ final class AppTapFeedback extends StatefulWidget {
     this.behavior = HitTestBehavior.opaque,
   });
 
+  /// The widget to apply press feedback to.
   final Widget child;
+
+  /// Called when the child is tapped.
   final VoidCallback? onTap;
+
+  /// Whether tapping is enabled.
   final bool enabled;
+
+  /// The scale applied while pressed (1.0 = no scaling).
   final double scale;
+
+  /// The opacity applied while pressed (1.0 = fully opaque).
   final double pressedOpacity;
+
+  /// The duration of the press animation.
   final Duration duration;
+
+  /// How the gesture detector behaves during hit testing.
   final HitTestBehavior behavior;
 
   @override

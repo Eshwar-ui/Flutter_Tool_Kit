@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'app_issue_screen.dart';
 
+/// A ready-made screen that prompts the user to grant a named permission,
+/// offering allow and open-settings actions.
 final class PermissionScreen extends StatelessWidget {
+  /// Creates a permission-request screen for [permissionName].
   const PermissionScreen({
     super.key,
     required this.permissionName,
@@ -16,14 +19,31 @@ final class PermissionScreen extends StatelessWidget {
     this.wrapWithScaffold = true,
   });
 
+  /// The human-readable name of the permission being requested.
   final String permissionName;
+
+  /// An optional custom headline; defaults to a message using [permissionName].
   final String? title;
+
+  /// An optional custom message; defaults to a prompt using [permissionName].
   final String? message;
+
+  /// The icon displayed above the title.
   final IconData icon;
+
+  /// The label for the primary allow button.
   final String primaryActionLabel;
+
+  /// Called when the allow button is pressed.
   final VoidCallback? onPrimaryAction;
+
+  /// The label for the optional open-settings button.
   final String? settingsLabel;
+
+  /// Called when the open-settings button is pressed.
   final VoidCallback? onOpenSettings;
+
+  /// Whether to wrap the content in a [Scaffold].
   final bool wrapWithScaffold;
 
   @override

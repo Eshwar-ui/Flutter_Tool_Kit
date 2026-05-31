@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A centered error/empty placeholder with an icon, title, message, and an
+/// optional retry button. Offers a [compact] variant for inline use.
 final class RetryView extends StatelessWidget {
+  /// Creates a retry view.
   const RetryView({
     super.key,
     required this.title,
@@ -12,12 +15,25 @@ final class RetryView extends StatelessWidget {
     this.compact = false,
   });
 
+  /// The headline text.
   final String title;
+
+  /// An optional supporting message.
   final String? message;
+
+  /// The label for the retry button.
   final String retryLabel;
+
+  /// Called when the retry button is pressed; the button is hidden when `null`.
   final VoidCallback? onRetry;
+
+  /// The icon shown above the title; hidden when `null`.
   final IconData? icon;
+
+  /// Padding around the content.
   final EdgeInsetsGeometry padding;
+
+  /// Whether to use the smaller, inline-friendly layout.
   final bool compact;
 
   @override

@@ -1,6 +1,13 @@
 import 'package:flutter/widgets.dart';
 
+/// A set of ready-made [FormFieldValidator]s for common input types such as
+/// email, password, phone, and one-time codes.
+///
+/// Each factory returns a validator that yields an error message string when
+/// the value is invalid, or `null` when it is valid.
 abstract final class AppFormValidators {
+  /// Combines [validators] into a single validator that returns the first
+  /// non-null error. Null entries are ignored.
   static FormFieldValidator<String> compose(
     List<FormFieldValidator<String>?> validators,
   ) {
@@ -15,6 +22,7 @@ abstract final class AppFormValidators {
     };
   }
 
+  /// Validates that a value is present and not blank.
   static FormFieldValidator<String> required({
     String message = 'This field is required',
   }) {
@@ -26,6 +34,7 @@ abstract final class AppFormValidators {
     };
   }
 
+  /// Validates that a value is a well-formed email address.
   static FormFieldValidator<String> email({
     String requiredMessage = 'Email is required',
     String invalidMessage = 'Enter a valid email address',
@@ -44,6 +53,8 @@ abstract final class AppFormValidators {
     ]);
   }
 
+  /// Validates a password against configurable strength rules such as minimum
+  /// length and required character classes.
   static FormFieldValidator<String> password({
     int minLength = 8,
     bool requireUppercase = true,
@@ -77,6 +88,10 @@ abstract final class AppFormValidators {
     ]);
   }
 
+  /// Validates that a value matches the password returned by [password].
+  ///
+  /// Pass a closure (e.g. `() => controller.text`) so the comparison always
+  /// uses the latest password value.
   static FormFieldValidator<String> confirmPassword({
     required String Function() password,
     String requiredMessage = 'Confirm your password',
@@ -90,6 +105,7 @@ abstract final class AppFormValidators {
     ]);
   }
 
+  /// Validates that a name is present and at least [minLength] characters long.
   static FormFieldValidator<String> name({
     String requiredMessage = 'Name is required',
     int minLength = 2,
@@ -106,6 +122,8 @@ abstract final class AppFormValidators {
     ]);
   }
 
+  /// Validates that a value is a plausible phone number (7–15 digits, with an
+  /// optional leading `+`).
   static FormFieldValidator<String> phone({
     String requiredMessage = 'Phone number is required',
     String invalidMessage = 'Enter a valid phone number',
@@ -121,6 +139,8 @@ abstract final class AppFormValidators {
     ]);
   }
 
+  /// Validates that a value is a numeric one-time code of exactly [length]
+  /// digits.
   static FormFieldValidator<String> otp({
     int length = 6,
     String requiredMessage = 'Code is required',

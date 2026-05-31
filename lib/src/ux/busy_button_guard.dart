@@ -1,12 +1,19 @@
 import 'package:flutter/widgets.dart';
 
+/// Builds a button given the current busy state and a tap handler.
+///
+/// [onPressed] is `null` while busy or disabled, so the button can render an
+/// inactive/spinner state.
 typedef BusyButtonBuilder = Widget Function(
   BuildContext context,
   bool isBusy,
   VoidCallback? onPressed,
 );
 
+/// Guards an async action so it cannot run concurrently: it tracks the
+/// in-flight state and disables the button until the [Future] completes.
 final class BusyButtonGuard extends StatefulWidget {
+  /// Creates a busy-button guard.
   const BusyButtonGuard({
     super.key,
     required this.onPressed,
@@ -14,8 +21,13 @@ final class BusyButtonGuard extends StatefulWidget {
     this.enabled = true,
   });
 
+  /// The async action to run; the guard prevents overlapping invocations.
   final Future<void> Function()? onPressed;
+
+  /// Builds the button from the current busy state and tap handler.
   final BusyButtonBuilder builder;
+
+  /// Whether the button is enabled.
   final bool enabled;
 
   @override
