@@ -5,7 +5,9 @@ void main() {
   runApp(const ToolkitExampleApp());
 }
 
+/// The root widget for the flutter_app_utilities example app.
 final class ToolkitExampleApp extends StatelessWidget {
+  /// Creates the example app.
   const ToolkitExampleApp({super.key});
 
   @override
@@ -21,7 +23,10 @@ final class ToolkitExampleApp extends StatelessWidget {
   }
 }
 
+/// A sample screen showcasing the form fields and screens provided by the
+/// package.
 final class ToolkitExampleScreen extends StatefulWidget {
+  /// Creates the example screen.
   const ToolkitExampleScreen({super.key});
 
   @override
