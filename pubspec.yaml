@@ -1,6 +1,6 @@
 name: flutter_app_utilities
 description: A zero-dependency Flutter toolkit with reusable extensions, UX widgets, form presets, validators, and common app state screens.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/Eshwar-ui/Flutter-App-Utilities
 repository: https://github.com/Eshwar-ui/Flutter-App-Utilities
 issue_tracker: https://github.com/Eshwar-ui/Flutter-App-Utilities/issues

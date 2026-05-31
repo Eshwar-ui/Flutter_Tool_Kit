@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Updated pub.dev package metadata to point to the Flutter App Utilities GitHub repository.
+
 ## 0.1.0
 
 - Initial reusable package structure.
